@@ -19,6 +19,8 @@ jobs:
           docker build -f ./Dockerfile -t devopshint/node-app:latest .
           echo -n "verifying images:"
           docker images
+          # Verify the image is in Minikube's Docker
+          minikube ssh "docker images | grep devopshint"
       - name: Deploy to minikube
         run:
           kubectl apply -f k8s-node-app.yaml
